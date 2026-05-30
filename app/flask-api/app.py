@@ -37,6 +37,10 @@ with app.app_context():
             time.sleep(5)
             retries -= 1
 
+@app.route('/')
+def index():
+    return jsonify({"message": "Welcome to the DevOps Assignment 3 API", "endpoints": ["/health", "/api/items"]})
+
 @app.route('/health')
 def health():
     return jsonify({"service": "flask-api", "status": "healthy"})
