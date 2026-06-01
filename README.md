@@ -14,18 +14,29 @@ This repository contains the implementation for Assignment 3, covering Repositor
 The application is fully containerized using Docker and orchestrated with Docker Compose.
 
 ## 📦 Task B5: Virtual Machine (.ova) Generation
-To generate an `.ova` file for submission, we use **Vagrant** to ensure the environment is reproducible.
+We have automated the VM creation and export process.
 
-### 1. Build the VM Locally:
+### Automated Export & Git Push:
+Run this script on your **host machine** (Mac/Windows) with VirtualBox and Vagrant installed:
 ```bash
-vagrant up
+chmod +x export_ova.sh
+./export_ova.sh
 ```
+This script will:
+1. `vagrant up` (Build the VM).
+2. Run `./start.sh` inside the VM.
+3. `vagrant halt` (Shut down the VM).
+4. `vboxmanage export` (Create `assignment-3.ova`).
+5. `git push` (Upload the .ova to GitHub).
 
-### 2. Export to .ova:
-1. Open **VirtualBox**.
-2. Select the running/stopped instance (usually named something like `assignment-3_default_...`).
-3. Go to **File > Export Appliance**.
-4. Save the file as `assignment-3.ova`.
+**Note:** If your `.ova` is larger than 100MB, ensure you have **Git LFS** installed (`brew install git-lfs`).
+
+### Manual Export:
+1. Build the VM: `vagrant up`
+2. Open **VirtualBox GUI**.
+3. Select `DevOps-Assignment-3`.
+4. Go to **File > Export Appliance**.
+5. Save as `assignment-3.ova`.
 
 ## 🛠️ Usage
 ### Docker Compose
